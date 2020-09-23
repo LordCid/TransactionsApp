@@ -31,7 +31,7 @@ class TransactionsViewModelImpl(
     }
 }
 
-class MainListViewModelFactory (
+class TransactionViewModelFactory @Inject constructor(
     private val getGroupListUseCase: GetTransactionsUseCase,
     private val ioDispatcher: CoroutineDispatcher
 ): ViewModelProvider.NewInstanceFactory(){
