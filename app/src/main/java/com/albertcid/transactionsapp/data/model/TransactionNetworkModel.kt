@@ -7,7 +7,7 @@ data class TransactionNetworkModel (
     @SerializedName("id")
     val id : Long? = null,
     @SerializedName("date")
-    val date: DateTime? = null,
+    val date: String? = null,
     @SerializedName("amount")
     val amount: Double? = null,
     @SerializedName("fee")

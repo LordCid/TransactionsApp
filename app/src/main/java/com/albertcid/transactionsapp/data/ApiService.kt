@@ -13,7 +13,6 @@ interface ApiService {
     @GET("transactions.json")
     fun getTransactions(): Call<List<TransactionNetworkModel>>
 
-
     companion object {
         fun create(): ApiService {
             val client = OkHttpClient.Builder()
