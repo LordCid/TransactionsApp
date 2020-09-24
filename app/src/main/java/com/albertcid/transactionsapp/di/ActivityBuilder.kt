@@ -7,7 +7,9 @@ import dagger.android.ContributesAndroidInjector
 
 @Module(
     includes = [
-        DomainModule::class
+        DomainModule::class,
+        DataModule::class,
+        ProvidesModule::class
     ]
 )
 interface ActivityBuilder {
