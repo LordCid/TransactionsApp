@@ -1,7 +1,8 @@
-package com.albertcid.transactionsapp.presentation
+package com.albertcid.transactionsapp.presentation.transaction.viewmodel
 
 import androidx.lifecycle.*
 import com.albertcid.transactionsapp.domain.usecase.GetTransactionsUseCase
+import com.albertcid.transactionsapp.presentation.transaction.TransactionsViewState
 import kotlinx.coroutines.*
 import javax.inject.Inject
 
@@ -36,6 +37,9 @@ class TransactionViewModelFactory @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher
 ): ViewModelProvider.NewInstanceFactory(){
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return TransactionsViewModelImpl(getGroupListUseCase, ioDispatcher) as T
+        return TransactionsViewModelImpl(
+            getGroupListUseCase,
+            ioDispatcher
+        ) as T
     }
 }

@@ -1,4 +1,4 @@
-package com.albertcid.transactionsapp.presentation
+package com.albertcid.transactionsapp.presentation.transaction
 
 import com.albertcid.transactionsapp.domain.model.Transaction
 

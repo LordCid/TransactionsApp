@@ -1,7 +1,7 @@
 package com.albertcid.transactionsapp.di
 
 import androidx.lifecycle.ViewModelProvider
-import com.albertcid.transactionsapp.presentation.TransactionViewModelFactory
+import com.albertcid.transactionsapp.presentation.transaction.viewmodel.TransactionViewModelFactory
 import dagger.Binds
 import dagger.Module
 

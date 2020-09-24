@@ -1,14 +1,17 @@
-package com.albertcid.transactionsapp.presentation
+package com.albertcid.transactionsapp.presentation.transaction.view
 
 import android.app.ProgressDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.format.DateFormat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.albertcid.transactionsapp.R
+import com.albertcid.transactionsapp.presentation.common.ErrorDialogFragment
+import com.albertcid.transactionsapp.presentation.transaction.TransactionsViewState
+import com.albertcid.transactionsapp.presentation.transaction.viewmodel.TransactionsViewModel
+import com.albertcid.transactionsapp.presentation.transaction.viewmodel.TransactionsViewModelImpl
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -26,7 +29,8 @@ class TransactionsActivity : AppCompatActivity() {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        transactionsAdapter = TransactionsAdapter()
+        transactionsAdapter =
+            TransactionsAdapter()
         setUpUI()
         setViewModel()
     }
@@ -66,7 +70,8 @@ class TransactionsActivity : AppCompatActivity() {
 
     private fun showErrorDialogFragment() {
         progressDialog.dismiss()
-        val errorDialog = ErrorDialogFragment()
+        val errorDialog =
+            ErrorDialogFragment()
         errorDialog.show(supportFragmentManager, "error")
     }
 

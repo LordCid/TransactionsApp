@@ -6,6 +6,9 @@ import com.albertcid.transactionsapp.concreteOtherTransaction
 import com.albertcid.transactionsapp.concreteTransaction
 import com.albertcid.transactionsapp.domain.model.Transaction
 import com.albertcid.transactionsapp.domain.usecase.GetTransactionsUseCase
+import com.albertcid.transactionsapp.presentation.transaction.TransactionsViewState
+import com.albertcid.transactionsapp.presentation.transaction.viewmodel.TransactionsViewModel
+import com.albertcid.transactionsapp.presentation.transaction.viewmodel.TransactionsViewModelImpl
 import com.nhaarman.mockitokotlin2.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -40,7 +43,11 @@ class TransactionsViewModelTest {
     @Before
     fun setUp() {
         Dispatchers.setMain(dispatcher)
-        sut = TransactionsViewModelImpl(getTransactionsUseCase, dispatcher)
+        sut =
+            TransactionsViewModelImpl(
+                getTransactionsUseCase,
+                dispatcher
+            )
     }
 
     @ExperimentalCoroutinesApi

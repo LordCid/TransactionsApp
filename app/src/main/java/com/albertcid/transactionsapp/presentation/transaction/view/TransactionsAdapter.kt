@@ -1,4 +1,4 @@
-package com.albertcid.transactionsapp.presentation
+package com.albertcid.transactionsapp.presentation.transaction.view
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +8,6 @@ import com.albertcid.transactionsapp.R
 import com.albertcid.transactionsapp.domain.model.Transaction
 import com.github.debop.kodatimes.toIsoFormatDateString
 import kotlinx.android.synthetic.main.item_list.view.*
-import java.text.DateFormat
 import kotlin.properties.Delegates
 
 class TransactionsAdapter: RecyclerView.Adapter<ListItemViewHolder>() {
@@ -22,7 +21,9 @@ class TransactionsAdapter: RecyclerView.Adapter<ListItemViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListItemViewHolder {
         val inflater: LayoutInflater = LayoutInflater.from(parent.context)
         val view: View = inflater.inflate(R.layout.item_list, parent, false)
-        return ListItemViewHolder(view)
+        return ListItemViewHolder(
+            view
+        )
     }
 
     override fun getItemCount() = dataList.size

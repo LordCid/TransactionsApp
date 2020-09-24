@@ -1,4 +1,4 @@
-package com.albertcid.transactionsapp.presentation
+package com.albertcid.transactionsapp.presentation.common
 
 import android.app.Dialog
 import android.os.Bundle
