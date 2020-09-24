@@ -4,7 +4,6 @@ import android.app.ProgressDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.format.DateFormat
-import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,7 +26,7 @@ class TransactionsActivity : AppCompatActivity() {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        transactionsAdapter = TransactionsAdapter(DateFormat.getDateFormat(this))
+        transactionsAdapter = TransactionsAdapter()
         setUpUI()
         setViewModel()
     }
@@ -54,7 +53,8 @@ class TransactionsActivity : AppCompatActivity() {
         when (screenState) {
             is TransactionsViewState.Loading -> showLoadingDialogFragment()
             is TransactionsViewState.ShowData -> {
-
+                progressDialog.dismiss()
+                transactionsAdapter.dataList = screenState.transctions
             }
             is TransactionsViewState.Error -> showErrorDialogFragment()
         }
