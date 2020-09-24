@@ -6,7 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.albertcid.transactionsapp.R
 import com.albertcid.transactionsapp.domain.model.Transaction
+import com.github.debop.kodatimes.toIsoFormatDateString
 import kotlinx.android.synthetic.main.item_list.view.*
+import java.text.DateFormat
 import kotlin.properties.Delegates
 
 class TransactionsAdapter: RecyclerView.Adapter<ListItemViewHolder>() {
@@ -36,7 +38,7 @@ class ListItemViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     fun bind(transaction: Transaction) {
         with(itemView) {
             total_amount_tv.text = transaction.amount.toString()
-            date_tv.text = transaction.date.toString()
+            date_tv.text = transaction.date.toIsoFormatDateString()
             description_tv.text = transaction.description
         }
     }
