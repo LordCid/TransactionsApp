@@ -1,6 +1,6 @@
 package com.albertcid.transactionsapp
 
-import com.albertcid.transactionsapp.data.model.TransactionNetworkModel
+import com.albertcid.transactionsapp.data.network.model.TransactionNetworkModel
 import com.albertcid.transactionsapp.domain.model.Transaction
 import org.joda.time.DateTime
 

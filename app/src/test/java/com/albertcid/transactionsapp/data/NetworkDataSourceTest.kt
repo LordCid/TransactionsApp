@@ -4,8 +4,10 @@ import com.albertcid.transactionsapp.concreteOtherTransaction
 import com.albertcid.transactionsapp.concreteOtherTransactionNetworModel
 import com.albertcid.transactionsapp.concreteTransaction
 import com.albertcid.transactionsapp.concreteTransactionNetworModel
-import com.albertcid.transactionsapp.data.model.TransactionNetworkModel
-import com.albertcid.transactionsapp.domain.model.Transaction
+import com.albertcid.transactionsapp.data.network.ApiService
+import com.albertcid.transactionsapp.data.network.NetworkDataSource
+import com.albertcid.transactionsapp.data.network.NetworkDataSourceImpl
+import com.albertcid.transactionsapp.data.network.model.TransactionNetworkModel
 import com.nhaarman.mockitokotlin2.given
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
@@ -14,7 +16,6 @@ import org.junit.Before
 
 import org.junit.Assert.*
 import org.junit.Test
-import org.mockito.ArgumentMatchers
 import retrofit2.mock.Calls
 
 class NetworkDataSourceTest {
@@ -24,7 +25,9 @@ class NetworkDataSourceTest {
 
     @Before
     fun setUp() {
-        sut = NetworkDataSourceImpl(apiService)
+        sut = NetworkDataSourceImpl(
+            apiService
+        )
     }
 
     @Test

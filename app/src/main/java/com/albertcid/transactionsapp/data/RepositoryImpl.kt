@@ -1,7 +1,6 @@
 package com.albertcid.transactionsapp.data
 
-import com.albertcid.transactionsapp.domain.model.Transaction
-import org.joda.time.DateTime
+import com.albertcid.transactionsapp.data.network.NetworkDataSource
 
 class RepositoryImpl(
     private val networkDataSource: NetworkDataSource

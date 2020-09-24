@@ -1,4 +1,4 @@
-package com.albertcid.transactionsapp.data
+package com.albertcid.transactionsapp.data.network
 
 import com.albertcid.transactionsapp.domain.model.Transaction
 

@@ -1,7 +1,6 @@
-package com.albertcid.transactionsapp.data.model
+package com.albertcid.transactionsapp.data.network.model
 
 import com.google.gson.annotations.SerializedName
-import org.joda.time.DateTime
 
 data class TransactionNetworkModel (
     @SerializedName("id")

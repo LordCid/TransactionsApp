@@ -1,6 +1,6 @@
-package com.albertcid.transactionsapp.data
+package com.albertcid.transactionsapp.data.network
 
-import com.albertcid.transactionsapp.data.model.TransactionNetworkModel
+import com.albertcid.transactionsapp.data.network.model.TransactionNetworkModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
