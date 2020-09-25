@@ -23,10 +23,10 @@ class TransactionsViewModelImpl(
             val results = withContext(ioDispatcher) { getTransactionsUseCase() }
             results.fold(
                 onSuccess = { dataList ->
-                    _viewState.value = TransactionsViewState.ShowData(
-                        dataList.map { it.toTransactionUIModel() }
-                            .sortedByDescending { it.date }
+                    val resList = filterMosTransactionWithSameId(
+                        dataList.map{ it.toTransactionUIModel() }.sortedByDescending { it.date }
                     )
+                    _viewState.value = TransactionsViewState.ShowData(resList)
                 },
                 onFailure = {
                     _viewState.value = TransactionsViewState.Error
@@ -37,10 +37,21 @@ class TransactionsViewModelImpl(
     }
 }
 
+private fun filterMosTransactionWithSameId(list: List<TransactionUIModel>): List<TransactionUIModel> {
+    val mutableList = mutableListOf<TransactionUIModel>()
+    list.groupBy { it.id }.forEach {
+        val transaction = it.value.maxBy { item -> item.date }
+        if (transaction != null) {
+            mutableList.add(transaction)
+        }
+    }
+    return mutableList
+}
+
 class TransactionViewModelFactory @Inject constructor(
     private val getGroupListUseCase: GetTransactionsUseCase,
     private val ioDispatcher: CoroutineDispatcher
-): ViewModelProvider.NewInstanceFactory(){
+) : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return TransactionsViewModelImpl(
             getGroupListUseCase,

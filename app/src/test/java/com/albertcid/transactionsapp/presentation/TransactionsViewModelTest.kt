@@ -81,13 +81,11 @@ class TransactionsViewModelTest {
             //GIVEN
             val result = listOf(
                 secondTransaction,
-                fourthTransaction,
                 firstTransaction,
                 thirdTransaction
             )
             given(getTransactionsUseCase.invoke()).willReturn(Result.success(result))
             val expected = listOf(
-                fourthTransactionUI,
                 thirdTransactionUI,
                 secondTransactionUI,
                 firstTransactionUI
@@ -110,14 +108,12 @@ class TransactionsViewModelTest {
         runBlocking {
             //GIVEN
             val result = listOf(
-                fourthOtherTransaction,
                 secondOtherTransaction,
                 thirdOtherTransaction,
                 firstOtherTransaction
             )
             given(getTransactionsUseCase.invoke()).willReturn(Result.success(result))
             val expected = listOf(
-                fourthOtherTransactionUI,
                 thirdOtherTransactionUI,
                 secondOtherTransactionUI,
                 firstOtherTransactionUI

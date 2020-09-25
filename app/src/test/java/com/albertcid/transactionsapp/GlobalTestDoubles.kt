@@ -43,25 +43,86 @@ val concreteOtherTransaction = Transaction(
     description = "description"
 )
 
-val firstTransaction = getTransactionByDate("2018-07-11T22:49:24.000Z")
-val secondTransaction = getTransactionByDate("2018-07-14T16:54:27.000Z")
-val thirdTransaction =  getTransactionByDate("2018-07-24T18:10:10.000Z")
-val fourthTransaction = getTransactionByDate("2018-07-29T17:56:43.000Z")
+val firstTransaction = Transaction(
+    id = 123,
+    date = DateTime("2018-07-11T22:49:24.000Z"),
+    fee = -35.06,
+    amount = -234.56,
+    description = "description"
+)
+val secondTransaction = Transaction(
+    id = 34,
+    date = DateTime("2018-07-14T16:54:27.000Z"),
+    fee = -35.06,
+    amount = -234.56,
+    description = "description"
+)
+val thirdTransaction =  Transaction(
+    id = 3478,
+    date = DateTime("2018-07-24T18:10:10.000Z"),
+    fee = -35.06,
+    amount = -234.56,
+    description = "description"
+)
 
-val firstTransactionUI = getUIModelTransactionByDate("2018-07-11T22:49:24.000Z")
-val secondTransactionUI = getUIModelTransactionByDate("2018-07-14T16:54:27.000Z")
-val thirdTransactionUI = getUIModelTransactionByDate("2018-07-24T18:10:10.000Z")
-val fourthTransactionUI = getUIModelTransactionByDate("2018-07-29T17:56:43.000Z")
 
-val firstOtherTransaction = getOtherTransactionByDate("2018-07-11T22:49:24.000Z")
-val secondOtherTransaction = getOtherTransactionByDate("2018-07-14T16:54:27.000Z")
-val thirdOtherTransaction = getOtherTransactionByDate("2018-07-24T18:10:10.000Z")
-val fourthOtherTransaction = getOtherTransactionByDate("2018-07-29T17:56:43.000Z")
+val firstTransactionUI = TransactionUIModel(
+    id = 123,
+    date = DateTime("2018-07-11T22:49:24.000Z"),
+    amount = -269.62,
+    description = "description"
+)
+val secondTransactionUI = TransactionUIModel(
+    id = 34,
+    date = DateTime("2018-07-14T16:54:27.000Z"),
+    amount = -269.62,
+    description = "description"
+)
+val thirdTransactionUI = TransactionUIModel(
+    id = 3478,
+    date = DateTime("2018-07-24T18:10:10.000Z"),
+    amount = -269.62,
+    description = "description"
+)
 
-val firstOtherTransactionUI = getOtherUIModelTransactionByDate("2018-07-11T22:49:24.000Z")
-val secondOtherTransactionUI = getOtherUIModelTransactionByDate("2018-07-14T16:54:27.000Z")
-val thirdOtherTransactionUI= getOtherUIModelTransactionByDate("2018-07-24T18:10:10.000Z")
-val fourthOtherTransactionUI= getOtherUIModelTransactionByDate("2018-07-29T17:56:43.000Z")
+val firstOtherTransaction =  Transaction(
+    id = 4567,
+    date = DateTime("2018-07-11T22:49:24.000Z"),
+    amount = -234.56,
+    description = "description"
+)
+val secondOtherTransaction = Transaction(
+    id = 987,
+    date = DateTime("2018-07-14T16:54:27.000Z"),
+    amount = -234.56,
+    description = "description"
+)
+val thirdOtherTransaction =  Transaction(
+    id = 432,
+    date = DateTime("2018-07-24T18:10:10.000Z"),
+    amount = -234.56,
+    description = "description"
+)
+
+val firstOtherTransactionUI = TransactionUIModel(
+    id = 4567,
+    date = DateTime("2018-07-11T22:49:24.000Z"),
+    amount = -234.56,
+    description = "description"
+)
+val secondOtherTransactionUI = TransactionUIModel(
+    id = 987,
+    date = DateTime("2018-07-14T16:54:27.000Z"),
+    amount = -234.56,
+    description = "description"
+)
+val thirdOtherTransactionUI = TransactionUIModel(
+    id = 432,
+    date = DateTime("2018-07-24T18:10:10.000Z"),
+    amount = -234.56,
+    description = "description"
+)
+
 
 fun getTransactionByDate(date: String) = Transaction(
     id = 123,
