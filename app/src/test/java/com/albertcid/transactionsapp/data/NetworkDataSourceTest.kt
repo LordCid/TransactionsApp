@@ -30,10 +30,13 @@ class NetworkDataSourceTest {
     @Test
     fun `When get group list, should invoke proper apiService function`() {
         runBlocking {
+            //GIVEN
             givenNetworkTransactionsListResponseOK(emptyList())
 
+            //WHEN
             sut.getTransactionsList()
 
+            //THEN
             verify(apiService).getTransactions()
         }
     }
@@ -41,13 +44,16 @@ class NetworkDataSourceTest {
     @Test
     fun `Given Success response, when get group list, then result success list model is returned`() {
         runBlocking {
+            //GIVEN
             val expected = listOf(concreteTransaction, concreteTransaction)
             givenNetworkTransactionsListResponseOK(
                 listOf(concreteTransactionNetworModel, concreteTransactionNetworModel)
             )
 
+            //WHEN
             val actual = sut.getTransactionsList()
 
+            //THEN
             assertEquals(Result.success(expected), actual)
         }
     }
@@ -55,13 +61,16 @@ class NetworkDataSourceTest {
     @Test
     fun `Given Success response, when get OTHER group list, then result success list model is returned`() {
         runBlocking {
+            //GIVEN
             val expected = listOf(concreteOtherTransaction, concreteOtherTransaction)
             givenNetworkTransactionsListResponseOK(
                 listOf(concreteOtherTransactionNetworModel, concreteOtherTransactionNetworModel)
             )
 
+            //WHEN
             val actual = sut.getTransactionsList()
 
+            //THEN
             assertEquals(Result.success(expected), actual)
         }
     }
@@ -69,6 +78,7 @@ class NetworkDataSourceTest {
     @Test
     fun `Given some transaction results with malformed Date, then these resutls wont be returned`() {
         runBlocking {
+            //GIVEN
             val expected = listOf(concreteTransaction, concreteOtherTransaction)
             givenNetworkTransactionsListResponseOK(
                 listOf(
@@ -78,8 +88,10 @@ class NetworkDataSourceTest {
                 )
             )
 
+            //WHEN
             val actual = sut.getTransactionsList()
 
+            //THEN
             assertEquals(Result.success(expected), actual)
         }
     }
@@ -87,10 +99,13 @@ class NetworkDataSourceTest {
     @Test
     fun `Given Failure response, when get group list, then return Result failure`() {
         runBlocking {
+            //GIVEN
             givenNetworkTransactionsListResponsKO()
 
+            //WHEN
             val result = sut.getTransactionsList()
 
+            //THEN
             assert(result.isFailure)
         }
     }

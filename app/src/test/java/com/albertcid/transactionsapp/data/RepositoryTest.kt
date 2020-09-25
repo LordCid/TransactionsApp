@@ -24,11 +24,14 @@ class RepositoryTest {
     @Test
     fun `Given results, When get transaction list, data is get from network datasource`() {
         runBlocking {
+            //GIVEN
             val expected = Result.success(listOf(concreteTransaction, concreteTransaction))
             given(networkDataSource.getTransactionsList()).willReturn(expected)
 
+            //WHEN
             val actual = sut.getTransactions()
 
+            //THEN
             assertEquals(expected, actual)
 
         }
@@ -37,11 +40,14 @@ class RepositoryTest {
     @Test
     fun `Given OTHER results, When get transaction list, data is get from network datasource`() {
         runBlocking {
+            //GIVEN
             val expected = Result.success(listOf(concreteOtherTransaction, concreteOtherTransaction))
             given(networkDataSource.getTransactionsList()).willReturn(expected)
 
+            //WHEN
             val actual = sut.getTransactions()
 
+            //THEN
             assertEquals(expected, actual)
 
         }
