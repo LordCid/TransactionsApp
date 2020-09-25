@@ -1,4 +1,4 @@
-package com.albertcid.transactionsapp.presentation.model
+package com.albertcid.transactionsapp.presentation.transaction.model
 
 import org.joda.time.DateTime
 

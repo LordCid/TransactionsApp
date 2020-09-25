@@ -2,7 +2,7 @@ package com.albertcid.transactionsapp.domain
 
 import com.albertcid.transactionsapp.data.network.model.TransactionNetworkModel
 import com.albertcid.transactionsapp.domain.model.Transaction
-import com.albertcid.transactionsapp.presentation.model.TransactionUIModel
+import com.albertcid.transactionsapp.presentation.transaction.model.TransactionUIModel
 import org.joda.time.DateTime
 
 fun TransactionNetworkModel.toTransactionModel() = Transaction(

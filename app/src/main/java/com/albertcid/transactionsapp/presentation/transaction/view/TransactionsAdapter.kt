@@ -6,8 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.albertcid.transactionsapp.R
-import com.albertcid.transactionsapp.domain.model.Transaction
-import com.albertcid.transactionsapp.presentation.model.TransactionUIModel
+import com.albertcid.transactionsapp.presentation.transaction.model.TransactionUIModel
 import com.github.debop.kodatimes.toIsoFormatDateString
 import kotlinx.android.synthetic.main.item_list.view.*
 import kotlin.properties.Delegates

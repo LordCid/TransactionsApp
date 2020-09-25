@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.albertcid.transactionsapp.domain.toTransactionUIModel
 import com.albertcid.transactionsapp.domain.usecase.GetTransactionsUseCase
 import com.albertcid.transactionsapp.presentation.transaction.TransactionsViewState
+import com.albertcid.transactionsapp.presentation.transaction.model.TransactionUIModel
 import kotlinx.coroutines.*
 import javax.inject.Inject
 
@@ -23,7 +24,8 @@ class TransactionsViewModelImpl(
             results.fold(
                 onSuccess = { dataList ->
                     _viewState.value = TransactionsViewState.ShowData(
-                        dataList.map { it.toTransactionUIModel() }.sortedBy { it.date }
+                        dataList.map { it.toTransactionUIModel() }
+                            .sortedByDescending { it.date }
                     )
                 },
                 onFailure = {

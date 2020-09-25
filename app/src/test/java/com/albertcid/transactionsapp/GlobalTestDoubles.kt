@@ -2,7 +2,7 @@ package com.albertcid.transactionsapp
 
 import com.albertcid.transactionsapp.data.network.model.TransactionNetworkModel
 import com.albertcid.transactionsapp.domain.model.Transaction
-import com.albertcid.transactionsapp.presentation.model.TransactionUIModel
+import com.albertcid.transactionsapp.presentation.transaction.model.TransactionUIModel
 import org.joda.time.DateTime
 
 val concreteTransactionNetworModel = TransactionNetworkModel(
@@ -63,7 +63,7 @@ val secondOtherTransactionUI = getOtherUIModelTransactionByDate("2018-07-14T16:5
 val thirdOtherTransactionUI= getOtherUIModelTransactionByDate("2018-07-24T18:10:10.000Z")
 val fourthOtherTransactionUI= getOtherUIModelTransactionByDate("2018-07-29T17:56:43.000Z")
 
-private fun getTransactionByDate(date: String) = Transaction(
+fun getTransactionByDate(date: String) = Transaction(
     id = 123,
     date = DateTime(date),
     fee = -35.06,
@@ -71,21 +71,21 @@ private fun getTransactionByDate(date: String) = Transaction(
     description = "description"
 )
 
-private fun getOtherTransactionByDate(date: String) = Transaction(
+fun getOtherTransactionByDate(date: String) = Transaction(
     id = 4567,
     date = DateTime(date),
     amount = -234.56,
     description = "description"
 )
 
-private fun getUIModelTransactionByDate(date: String) = TransactionUIModel(
+fun getUIModelTransactionByDate(date: String) = TransactionUIModel(
     id = 123,
     date = DateTime(date),
     amount = -269.62,
     description = "description"
 )
 
-private fun getOtherUIModelTransactionByDate(date: String) = TransactionUIModel(
+fun getOtherUIModelTransactionByDate(date: String) = TransactionUIModel(
     id = 4567,
     date = DateTime(date),
     amount = -234.56,

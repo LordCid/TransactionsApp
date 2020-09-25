@@ -15,6 +15,7 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
+import org.joda.time.DateTime
 import org.junit.After
 import org.junit.Before
 
@@ -86,10 +87,10 @@ class TransactionsViewModelTest {
             )
             given(getTransactionsUseCase.invoke()).willReturn(Result.success(result))
             val expected = listOf(
-                firstTransactionUI,
-                secondTransactionUI,
+                fourthTransactionUI,
                 thirdTransactionUI,
-                fourthTransactionUI
+                secondTransactionUI,
+                firstTransactionUI
             )
 
 
@@ -116,10 +117,10 @@ class TransactionsViewModelTest {
             )
             given(getTransactionsUseCase.invoke()).willReturn(Result.success(result))
             val expected = listOf(
-                firstOtherTransactionUI,
-                secondOtherTransactionUI,
+                fourthOtherTransactionUI,
                 thirdOtherTransactionUI,
-                fourthOtherTransactionUI
+                secondOtherTransactionUI,
+                firstOtherTransactionUI
             )
 
             //WHEN
@@ -150,7 +151,7 @@ class TransactionsViewModelTest {
     }
 
     @Test
-    fun `Given transaction results with fee, should return transaction model amount plus fee`() {
+    fun `Given transaction results with fee, should show transaction model amount plus fee in UI`() {
         runBlocking {
             //GIVEN
             val result = listOf(firstTransaction)
@@ -168,5 +169,25 @@ class TransactionsViewModelTest {
         }
     }
 
+    @Test
+    fun `Given transaction results with same Id, should show most recent in UI`() {
+        runBlocking {
+            //GIVEN
+            val firstTransaction = getTransactionByDate("2018-07-11T22:49:24.000Z")
+            val secondTransaction = getTransactionByDate("2018-07-24T18:10:10.000Z")
+            val result = listOf(firstTransaction, secondTransaction)
+            given(getTransactionsUseCase.invoke()).willReturn(Result.success(result))
+            val expected = listOf(getUIModelTransactionByDate("2018-07-24T18:10:10.000Z"))
+
+            //WHEN
+            sut.viewState.observeForever(observer)
+            sut.getTransactions()
+
+            //THEN
+            verify(observer, times(2)).onChanged(captorScreenState.capture())
+            val capturedState = captorScreenState.secondValue as TransactionsViewState.ShowData
+            assertEquals(expected, capturedState.transactions)
+        }
+    }
 
 }
