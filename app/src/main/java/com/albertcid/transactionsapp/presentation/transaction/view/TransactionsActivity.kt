@@ -1,10 +1,11 @@
 package com.albertcid.transactionsapp.presentation.transaction.view
 
 import android.app.ProgressDialog
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.albertcid.transactionsapp.R
@@ -15,6 +16,7 @@ import com.albertcid.transactionsapp.presentation.transaction.viewmodel.Transact
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
+
 
 class TransactionsActivity : AppCompatActivity() {
 
@@ -38,10 +40,11 @@ class TransactionsActivity : AppCompatActivity() {
     private fun setUpUI() {
         progressDialog = ProgressDialog(this)
         listView.apply {
+
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
             this.adapter = transactionsAdapter
         }
-
     }
 
     private fun setViewModel() {
