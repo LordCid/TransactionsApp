@@ -1,5 +1,6 @@
 package com.albertcid.transactionsapp.presentation.transaction.view
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,7 @@ import com.github.debop.kodatimes.toIsoFormatDateString
 import kotlinx.android.synthetic.main.item_list.view.*
 import kotlin.properties.Delegates
 
-class TransactionsAdapter: RecyclerView.Adapter<ListItemViewHolder>() {
+class TransactionsAdapter : RecyclerView.Adapter<ListItemViewHolder>() {
 
     var dataList: List<TransactionUIModel> by Delegates.observable(emptyList()) { _, oldValue, newValue ->
         if (oldValue != newValue) {
@@ -35,14 +36,17 @@ class TransactionsAdapter: RecyclerView.Adapter<ListItemViewHolder>() {
 
 }
 
-class ListItemViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+class ListItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(transaction: TransactionUIModel) {
         with(itemView) {
-            total_amount_tv.text = transaction.amount.toString()
+            total_amount_tv.apply {
+                text = transaction.amount.toString()
+                setTextColor(if(transaction.amount > 0) Color.GREEN else Color.RED)
+            }
             date_tv.text = transaction.date.toIsoFormatDateString()
             description_tv.text = transaction.description
         }
     }
-
 }
+
