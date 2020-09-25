@@ -19,6 +19,13 @@ val concreteOtherTransactionNetworModel = TransactionNetworkModel(
     description = "description"
 )
 
+val concreteTransactionNetworModelMalformedDate = TransactionNetworkModel(
+    id = 456,
+    date = "2018--11T11:31:27.000Z",
+    amount = -234.56,
+    description = "description"
+)
+
 
 val concreteTransaction = Transaction(
     id = 123,
