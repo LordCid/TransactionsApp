@@ -171,9 +171,13 @@ class TransactionsViewModelTest {
             //GIVEN
             val firstTransaction = getTransactionByDate("2018-07-11T22:49:24.000Z")
             val secondTransaction = getTransactionByDate("2018-07-24T18:10:10.000Z")
-            val result = listOf(firstTransaction, secondTransaction)
+            val thirdTransaction = getOtherTransactionByDate("2018-07-19T21:33:19.000Z")
+            val result = listOf(firstTransaction, secondTransaction, thirdTransaction)
             given(getTransactionsUseCase.invoke()).willReturn(Result.success(result))
-            val expected = listOf(getUIModelTransactionByDate("2018-07-24T18:10:10.000Z"))
+            val expected = listOf(
+                getUIModelTransactionByDate("2018-07-24T18:10:10.000Z"),
+                getOtherUIModelTransactionByDate("2018-07-19T21:33:19.000Z")
+            )
 
             //WHEN
             sut.viewState.observeForever(observer)

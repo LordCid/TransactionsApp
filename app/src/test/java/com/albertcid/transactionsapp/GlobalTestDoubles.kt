@@ -132,8 +132,23 @@ fun getTransactionByDate(date: String) = Transaction(
     description = "description"
 )
 
+fun getOtherTransactionByDate(date: String) = Transaction(
+    id = 425,
+    date = DateTime(date),
+    fee = -35.06,
+    amount = -234.56,
+    description = "description"
+)
+
 fun getUIModelTransactionByDate(date: String) = TransactionUIModel(
     id = 123,
+    date = DateTime(date),
+    amount = -269.62,
+    description = "description"
+)
+
+fun getOtherUIModelTransactionByDate(date: String) = TransactionUIModel(
+    id = 425,
     date = DateTime(date),
     amount = -269.62,
     description = "description"
