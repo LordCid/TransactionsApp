@@ -58,7 +58,7 @@ class TransactionsActivity : AppCompatActivity() {
             is TransactionsViewState.Loading -> showLoadingDialogFragment()
             is TransactionsViewState.ShowData -> {
                 progressDialog.dismiss()
-                transactionsAdapter.dataList = screenState.transctions
+                transactionsAdapter.dataList = screenState.transactions
             }
             is TransactionsViewState.Error -> showErrorDialogFragment()
         }

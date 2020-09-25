@@ -6,13 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.albertcid.transactionsapp.R
 import com.albertcid.transactionsapp.domain.model.Transaction
+import com.albertcid.transactionsapp.presentation.model.TransactionUIModel
 import com.github.debop.kodatimes.toIsoFormatDateString
 import kotlinx.android.synthetic.main.item_list.view.*
 import kotlin.properties.Delegates
 
 class TransactionsAdapter: RecyclerView.Adapter<ListItemViewHolder>() {
 
-    var dataList: List<Transaction> by Delegates.observable(emptyList()) { _, oldValue, newValue ->
+    var dataList: List<TransactionUIModel> by Delegates.observable(emptyList()) { _, oldValue, newValue ->
         if (oldValue != newValue) {
             notifyDataSetChanged()
         }
@@ -36,7 +37,7 @@ class TransactionsAdapter: RecyclerView.Adapter<ListItemViewHolder>() {
 
 class ListItemViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
-    fun bind(transaction: Transaction) {
+    fun bind(transaction: TransactionUIModel) {
         with(itemView) {
             total_amount_tv.text = transaction.amount.toString()
             date_tv.text = transaction.date.toIsoFormatDateString()

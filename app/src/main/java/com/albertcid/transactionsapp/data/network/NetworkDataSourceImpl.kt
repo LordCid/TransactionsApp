@@ -1,6 +1,6 @@
 package com.albertcid.transactionsapp.data.network
 
-import com.albertcid.transactionsapp.data.network.model.toTransactionModel
+import com.albertcid.transactionsapp.domain.toTransactionModel
 import com.albertcid.transactionsapp.domain.DateChecker
 import com.albertcid.transactionsapp.domain.model.Transaction
 import retrofit2.awaitResponse

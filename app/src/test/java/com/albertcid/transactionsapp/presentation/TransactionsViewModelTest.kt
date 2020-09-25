@@ -2,10 +2,10 @@ package com.albertcid.transactionsapp.presentation
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.albertcid.transactionsapp.concreteOtherTransaction
-import com.albertcid.transactionsapp.concreteTransaction
+import com.albertcid.transactionsapp.*
 import com.albertcid.transactionsapp.domain.model.Transaction
 import com.albertcid.transactionsapp.domain.usecase.GetTransactionsUseCase
+import com.albertcid.transactionsapp.presentation.model.TransactionUIModel
 import com.albertcid.transactionsapp.presentation.transaction.TransactionsViewState
 import com.albertcid.transactionsapp.presentation.transaction.viewmodel.TransactionsViewModel
 import com.albertcid.transactionsapp.presentation.transaction.viewmodel.TransactionsViewModelImpl
@@ -75,7 +75,7 @@ class TransactionsViewModelTest {
     @Test
     fun `Given success when get transaction list, results are shown into UI`() {
         runBlocking {
-            val expectedList = listOf(concreteTransaction, concreteTransaction)
+            val expectedList = listOf(firstTransactionUI, secondTransactionUI)
             givenSuccessResultWithValues(expectedList)
 
             sut.viewState.observeForever(observer)
@@ -83,14 +83,14 @@ class TransactionsViewModelTest {
 
             verify(observer, times(2)).onChanged(captorScreenState.capture())
             val capturedState = captorScreenState.secondValue as TransactionsViewState.ShowData
-            assertEquals(expectedList, capturedState.transctions)
+            assertEquals(expectedList, capturedState.transactions)
         }
     }
 
     @Test
     fun `Given success when get OTHER transaction list, results are shown into UI`() {
         runBlocking {
-            val expectedList =  listOf(concreteOtherTransaction, concreteOtherTransaction)
+            val expectedList =  listOf(firstOtherTransactionUI, secondOtherTransactionUI)
             givenSuccessResultWithValues(expectedList)
 
             sut.viewState.observeForever(observer)
@@ -98,7 +98,7 @@ class TransactionsViewModelTest {
 
             verify(observer, times(2)).onChanged(captorScreenState.capture())
             val capturedState = captorScreenState.secondValue as TransactionsViewState.ShowData
-            assertEquals(expectedList, capturedState.transctions)
+            assertEquals(expectedList, capturedState.transactions)
         }
     }
 
@@ -115,7 +115,7 @@ class TransactionsViewModelTest {
         }
     }
 
-    private suspend fun givenSuccessResultWithValues(list: List<Transaction>) {
+    private suspend fun givenSuccessResultWithValues(list: List<TransactionUIModel>) {
         given(getTransactionsUseCase.invoke()).willReturn(Result.success(list))
     }
 
