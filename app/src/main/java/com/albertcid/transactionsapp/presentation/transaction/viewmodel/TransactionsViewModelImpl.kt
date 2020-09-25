@@ -1,6 +1,7 @@
 package com.albertcid.transactionsapp.presentation.transaction.viewmodel
 
 import androidx.lifecycle.*
+import com.albertcid.transactionsapp.domain.toTransactionUIModel
 import com.albertcid.transactionsapp.domain.usecase.GetTransactionsUseCase
 import com.albertcid.transactionsapp.presentation.transaction.TransactionsViewState
 import kotlinx.coroutines.*
@@ -20,8 +21,10 @@ class TransactionsViewModelImpl(
             _viewState.value = TransactionsViewState.Loading
             val results = withContext(ioDispatcher) { getTransactionsUseCase() }
             results.fold(
-                onSuccess = {
-                    _viewState.value = TransactionsViewState.ShowData(it)
+                onSuccess = { dataList ->
+                    _viewState.value = TransactionsViewState.ShowData(
+                        dataList.map { it.toTransactionUIModel() }.sortedBy { it.date }
+                    )
                 },
                 onFailure = {
                     _viewState.value = TransactionsViewState.Error

@@ -5,7 +5,6 @@ import androidx.lifecycle.Observer
 import com.albertcid.transactionsapp.*
 import com.albertcid.transactionsapp.domain.model.Transaction
 import com.albertcid.transactionsapp.domain.usecase.GetTransactionsUseCase
-import com.albertcid.transactionsapp.presentation.model.TransactionUIModel
 import com.albertcid.transactionsapp.presentation.transaction.TransactionsViewState
 import com.albertcid.transactionsapp.presentation.transaction.viewmodel.TransactionsViewModel
 import com.albertcid.transactionsapp.presentation.transaction.viewmodel.TransactionsViewModelImpl
@@ -30,6 +29,7 @@ class TransactionsViewModelTest {
 
     private val observer = mock<Observer<TransactionsViewState>>()
     private val getTransactionsUseCase = mock<GetTransactionsUseCase>()
+
     @ExperimentalCoroutinesApi
     private val dispatcher = TestCoroutineDispatcher()
 
@@ -60,67 +60,113 @@ class TransactionsViewModelTest {
     @Test
     fun `Should show Loading screen when invoke use case`() {
         runBlocking {
+            //GIVEN
             val expected = TransactionsViewState.Loading
 
+            //WHEN
             sut.viewState.observeForever(observer)
             sut.getTransactions()
 
+            //THEN
             verify(getTransactionsUseCase).invoke()
             verify(observer).onChanged(expected)
-
         }
     }
 
 
     @Test
-    fun `Given success when get transaction list, results are shown into UI`() {
+    fun `Given success when get transaction list, results are shown into UI sorted by date`() {
         runBlocking {
-            val expectedList = listOf(firstTransactionUI, secondTransactionUI)
-            givenSuccessResultWithValues(expectedList)
+            //GIVEN
+            val result = listOf(
+                secondTransaction,
+                fourthTransaction,
+                firstTransaction,
+                thirdTransaction
+            )
+            given(getTransactionsUseCase.invoke()).willReturn(Result.success(result))
+            val expected = listOf(
+                firstTransactionUI,
+                secondTransactionUI,
+                thirdTransactionUI,
+                fourthTransactionUI
+            )
 
+
+            //WHEN
             sut.viewState.observeForever(observer)
             sut.getTransactions()
 
+            //THEN
             verify(observer, times(2)).onChanged(captorScreenState.capture())
             val capturedState = captorScreenState.secondValue as TransactionsViewState.ShowData
-            assertEquals(expectedList, capturedState.transactions)
+            assertEquals(expected, capturedState.transactions)
         }
     }
 
     @Test
     fun `Given success when get OTHER transaction list, results are shown into UI`() {
         runBlocking {
-            val expectedList =  listOf(firstOtherTransactionUI, secondOtherTransactionUI)
-            givenSuccessResultWithValues(expectedList)
+            //GIVEN
+            val result = listOf(
+                fourthOtherTransaction,
+                secondOtherTransaction,
+                thirdOtherTransaction,
+                firstOtherTransaction
+            )
+            given(getTransactionsUseCase.invoke()).willReturn(Result.success(result))
+            val expected = listOf(
+                firstOtherTransactionUI,
+                secondOtherTransactionUI,
+                thirdOtherTransactionUI,
+                fourthOtherTransactionUI
+            )
 
+            //WHEN
             sut.viewState.observeForever(observer)
             sut.getTransactions()
 
+            //THEN
             verify(observer, times(2)).onChanged(captorScreenState.capture())
             val capturedState = captorScreenState.secondValue as TransactionsViewState.ShowData
-            assertEquals(expectedList, capturedState.transactions)
+            assertEquals(expected, capturedState.transactions)
         }
     }
 
     @Test
-    fun `Given failure when get trasaction list, error is shown in the UI`() {
+    fun `Given failure when get transaction list, error is shown in the UI`() {
         runBlocking {
-            givenFailureResult()
+            //GIVEN
+            given(getTransactionsUseCase.invoke()).willReturn(Result.failure(mock<Exception>()))
 
+            //WHEN
             sut.viewState.observeForever(observer)
             sut.getTransactions()
 
+            //THEN
             verify(observer, times(2)).onChanged(captorScreenState.capture())
             assert(captorScreenState.secondValue is TransactionsViewState.Error)
         }
     }
 
-    private suspend fun givenSuccessResultWithValues(list: List<TransactionUIModel>) {
-        given(getTransactionsUseCase.invoke()).willReturn(Result.success(list))
+    @Test
+    fun `Given transaction results with fee, should return transaction model amount plus fee`() {
+        runBlocking {
+            //GIVEN
+            val result = listOf(firstTransaction)
+            given(getTransactionsUseCase.invoke()).willReturn(Result.success(result))
+            val expected = listOf(firstTransactionUI)
+
+            //WHEN
+            sut.viewState.observeForever(observer)
+            sut.getTransactions()
+
+            //THEN
+            verify(observer, times(2)).onChanged(captorScreenState.capture())
+            val capturedState = captorScreenState.secondValue as TransactionsViewState.ShowData
+            assertEquals(expected, capturedState.transactions)
+        }
     }
 
-    private suspend fun givenFailureResult() {
-        given(getTransactionsUseCase.invoke()).willReturn(Result.failure(mock<Exception>()))
-    }
 
 }
